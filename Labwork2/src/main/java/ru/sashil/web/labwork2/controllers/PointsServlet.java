@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ru.rmntim.web.labwork2.repository.PointRepository;
+import ru.sashil.web.labwork2.repository.PointRepository;
 
 @WebServlet("/points")
 public class PointsServlet extends HttpServlet {

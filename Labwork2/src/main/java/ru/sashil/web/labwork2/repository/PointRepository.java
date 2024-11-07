@@ -2,7 +2,7 @@ package ru.sashil.web.labwork2.repository;
 
 import jakarta.ejb.Stateful;
 import jakarta.enterprise.context.SessionScoped;
-import ru.rmntim.web.labwork2.models.Point;
+import ru.sashil.web.labwork2.models.Point;
 
 import java.io.Serializable;
 import java.util.ArrayList;

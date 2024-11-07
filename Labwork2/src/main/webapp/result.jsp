@@ -1,5 +1,5 @@
-<%@ page import="ru.rmntim.web.labwork2.repository.PointRepository" %>
-<%@ page import="ru.rmntim.web.labwork2.models.Point" %>
+<%@ page import="ru.sashil.web.labwork2.repository.PointRepository" %>
+<%@ page import="ru.sashil.web.labwork2.models.Point" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -15,13 +15,13 @@
 <body>
 <nav class="navbar">
     <div id="info">
-        Timoshkin Roman
+        Ilin Alexander
         <br/>
-        P3231
+        P3216
         <br/>
         <span>v. <span class="fire">666</span></span>
     </div>
-    <a href="https://github.com/rmntim" target="_blank" id="github">github</a>
+    <a href="https://github.com/sashil" target="_blank" id="github">github</a>
 </nav>
 <main class="container">
     <section class="results">
