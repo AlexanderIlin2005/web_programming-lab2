@@ -29,7 +29,7 @@
         <div id="error" hidden>
         </div>
 
-        <form action="${pageContext.request.contextPath}/controller" method="get" id="data-form">
+        <form action="${pageContext.request.contextPath}/controller" method="post" id="data-form">
             <!-- X Input -->
             <label for="x">Enter X (from -3 to 5):</label>
             <input type="text" id="x" name="x" pattern="^-?[0-9]+(\.[0-9]+)?$" placeholder="e.g., 2.5" required>
