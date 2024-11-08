@@ -1,20 +1,6 @@
+// Оставляем валидацию наборов допустимых значений для y и r
 const VALID_YS = new Set([-5, -4, -3, -2, -1, 0, 1, 2, 3]);
 const VALID_RS = new Set([1, 1.5, 2, 2.5, 3]);
-
-/**
- * Gets R value
- * @returns {number} R multiplied by 100
- * @throws {Error} If no R is checked or multiple Rs are checked (should be impossible but why not)
- */
-function getR() {
-    const rs = Array.from(document.getElementsByName("r")).filter(
-        (el) => el.checked
-    );
-    if (rs.length !== 1) {
-        throw new Error("Exactly one r must be checked");
-    }
-    return Number(rs[0].value);
-}
 
 /**
  * Rounds to nearest half
@@ -23,16 +9,4 @@ function getR() {
  */
 function roundHalf(num) {
     return Math.round(num * 2) / 2;
-}
-
-/**
- * Checks that only one X checkbox is checked.
- * @param self {HTMLInputElement}
- * @returns {boolean}
- */
-function checkX(self) {
-    document
-        .querySelectorAll("input[type='checkbox'][name='x']")
-        .forEach((checkbox) => (checkbox.checked = false));
-    self.checked = true;
 }

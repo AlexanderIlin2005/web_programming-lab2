@@ -40,7 +40,7 @@ function validateInput(values) {
         throw new Error("y is required");
     }
 
-    if (!VALID_XS.has(Number(values.x))) {
+    if (!VALID_YS.has(Number(values.y))) {
             throw new Error(`y must be one of [${[...VALID_YS].join(", ")}]`);
         }
 
