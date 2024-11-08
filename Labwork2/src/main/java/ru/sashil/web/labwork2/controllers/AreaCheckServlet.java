@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet("/calculate")
 public class AreaCheckServlet extends HttpServlet {
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
     }
 

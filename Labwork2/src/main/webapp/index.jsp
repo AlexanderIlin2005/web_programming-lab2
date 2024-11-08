@@ -29,32 +29,34 @@
         <div id="error" hidden>
         </div>
 
-        <form action="${pageContext.request.contextPath}/controller" method="post" id="data-form">
-            <label for="xs">Select X:</label>
-            <fieldset id="xs">
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="-2">-2</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="-1.5">-1.5</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="-1">-1</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="-0.5">-0.5</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="0">0</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="0.5">0.5</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="1">1</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="1.5">1.5</label>
-                <label><input type="checkbox" name="x" onclick="checkX(this)" value="2">2</label>
-                <label><input type="checkbox" name="x" id="custom-x" disabled>Custom</label>
-            </fieldset>
+        <form action="${pageContext.request.contextPath}/controller" method="get" id="data-form">
+            <!-- X Input -->
+            <label for="x">Enter X (from -3 to 5):</label>
+            <input type="text" id="x" name="x" pattern="^-?[0-9]+(\.[0-9]+)?$" placeholder="e.g., 2.5" required>
 
-            <label for="y">Enter Y:</label>
-            <input type="number" id="y" name="y" required>
+            <!-- Y Input -->
+            <label for="y">Select Y:</label>
+            <select id="y" name="y" required>
+                <option value="-5">-5</option>
+                <option value="-4">-4</option>
+                <option value="-3">-3</option>
+                <option value="-2">-2</option>
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
 
-            <label for="rs">Select R:</label>
-            <fieldset id="rs">
-                <label><input type="radio" name="r" value="1">1</label>
-                <label><input type="radio" name="r" value="1.5">1.5</label>
-                <label><input type="radio" name="r" value="2">2</label>
-                <label><input type="radio" name="r" value="2.5">2.5</label>
-                <label><input type="radio" name="r" value="3">3</label>
-            </fieldset>
+            <!-- R Input -->
+            <label for="r">Select R:</label>
+            <select id="r" name="r" required>
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+            </select>
 
             <div>
                 <button type="submit">Submit</button>

@@ -1,4 +1,4 @@
-const VALID_XS = new Set([-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]);
+const VALID_YS = new Set([-5, -4, -3, -2, -1, 0, 1, 2, 3]);
 const VALID_RS = new Set([1, 1.5, 2, 2.5, 3]);
 
 /**

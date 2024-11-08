@@ -31,17 +31,19 @@ function validateInput(values) {
         throw new Error("x is required");
     }
 
-    if (!VALID_XS.has(Number(values.x))) {
-        throw new Error(`x must be one of [${[...VALID_XS].join(", ")}]`);
-    }
+    if (Number(values.x) < -3 || Number(values.x) > 5) {
+            throw new Error("x must be in [-3, 5]");
+        }
+
 
     if (values.y === undefined) {
         throw new Error("y is required");
     }
 
-    if (Number(values.y) < -5 || Number(values.y) > 5) {
-        throw new Error("y must be in [-5, 5]");
-    }
+    if (!VALID_XS.has(Number(values.x))) {
+            throw new Error(`y must be one of [${[...VALID_YS].join(", ")}]`);
+        }
+
 
     if (values.r === undefined) {
         throw new Error("r is required");
