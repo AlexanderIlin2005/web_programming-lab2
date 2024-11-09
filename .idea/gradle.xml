@@ -8,7 +8,7 @@
         <option name="gradleJvm" value="temurin-17" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/Labwork2" />
+            <option value="$PROJECT_DIR$/labwork2" />
           </set>
         </option>
       </GradleProjectSettings>
