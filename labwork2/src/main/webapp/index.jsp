@@ -32,7 +32,7 @@
         <div id="error" hidden>
         </div>
 
-        <form action="${pageContext.request.contextPath}/controllers" method="post" id="data-form">
+        <form action="${pageContext.request.contextPath}/controller" method="post" id="data-form">
 
             <!-- X Input -->
             <label for="x">Enter X (from -3 to 5):</label>
