@@ -79,18 +79,6 @@
     </section>
 </main>
 
-<script>
-    // JavaScript для вывода contextPath в консоль и на странице в заголовке
-    document.addEventListener("DOMContentLoaded", function() {
-        const contextPath = "${pageContext.request.contextPath}";
-        console.log("Context Path:", contextPath);
-
-        // Вывод contextPath в заголовок
-        const contextPathDisplay = document.getElementById("context-path-display");
-        contextPathDisplay.textContent = "Context Path: " + contextPath;
-    });
-</script>
-
 
 </body>
 </html>
