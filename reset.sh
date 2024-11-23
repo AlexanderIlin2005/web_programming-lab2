@@ -1,0 +1,1 @@
+scp -P 2222 /Users/sasailin/Downloads/wildfly-34.0.0.Final/standalone/configuration/standalone.xml s381032@se.ifmo.ru:/home/studs/s381032/wildfly-34.0.0.Final/standalone/configuration/
