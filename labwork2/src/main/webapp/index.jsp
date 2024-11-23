@@ -20,7 +20,6 @@
         <br/>
         P3216
         <br/>
-        <span>v. <span class="fire">666</span></span>
     </div>
     <a href="https://github.com/AlexanderIlin2005" target="_blank" id="github">github</a>
 </nav>

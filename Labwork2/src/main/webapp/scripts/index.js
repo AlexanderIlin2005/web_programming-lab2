@@ -5,7 +5,7 @@
 function submit(ev) {
     ev.preventDefault();
 
-    /** @type {HTMLDivElement} */
+    /** @§1§type {HTMLDivElement} */
     const errorDiv = document.getElementById("error");
 
     try {

@@ -13,7 +13,7 @@ import ru.sashil.web.labwork2.repository.PointRepository;
 @WebServlet("/points")
 public class PointsServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
     }
 

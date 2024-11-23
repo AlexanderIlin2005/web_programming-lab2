@@ -27,10 +27,5 @@
         <%= request.getAttribute("error") %>
     </section>
 </main>
-<footer id="copyright">all rights belong to ur mom,&nbsp;
-    <a href="http://www.wtfpl.net/txt/copying/"
-       target="_blank">WTFPL</a>
-    , 2024
-</footer>
 </body>
 </html>

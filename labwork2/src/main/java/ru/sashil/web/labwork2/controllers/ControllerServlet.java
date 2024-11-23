@@ -39,7 +39,7 @@ public class ControllerServlet extends HttpServlet {
             }
 
             if (x.isEmpty() || y.isEmpty() || r.isEmpty()) {
-                request.setAttribute("error", String.format(ERROR_MSG, "x, y, and r must not be empty"));
+                request.setAttribute("error", String.format(ERROR_MSG, "x, y, and r are required. Received values: x=" + x + ", y=" + y + ", r=" + r));
                 request.getRequestDispatcher("./error.jsp").forward(request, response);
                 return;
             }

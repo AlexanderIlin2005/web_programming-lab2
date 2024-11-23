@@ -11,14 +11,20 @@ async function initCanvas() {
 
     canvas.addEventListener("click", function (event) {
         const rect = canvas.getBoundingClientRect();
+
+        // Вычисляем координаты в системе Canvas
         const xDom = event.clientX - rect.left - canvas.width / 2;
-        const yDom = canvas.height / 2 - (event.clientY - rect.top);
+        const yDom = canvas.height / 2 - (event.clientY - rect.top); // инвертируем y, так как ось y идет вверх на canvas
 
         try {
             const r = getR();
-            const x = xDom * ((4 * r) / canvas.width);
-            const y = yDom * ((4 * r) / canvas.height);
-            sendPoint(x / r, y / r, r);
+
+            // Преобразуем координаты в систему координат с учетом масштаба
+            const x = xDom * (r / (canvas.width / 2)); // масштабируем по оси x
+            const y = yDom * (r / (canvas.height / 2)); // масштабируем по оси y
+
+            // Отправляем данные на сервер
+            sendPoint(x, y, r);
         } catch (e) {
             /** @type {HTMLDivElement} */
             const errorDiv = document.getElementById("error");
@@ -26,6 +32,7 @@ async function initCanvas() {
             errorDiv.innerText = e.message;
         }
     });
+
 
     try {
         const resp = await fetch("points");
@@ -50,7 +57,7 @@ async function initCanvas() {
 
         drawShape(ctx, canvas, points, SCALE_FACTOR);
     } catch (e) {
-        drawShape(ctx, canvas, [], SCALE_FACTOR);
+        drawShape(ctx, canvas, [], r * SCALE_FACTOR);
     }
 }
 
@@ -61,20 +68,39 @@ async function initCanvas() {
  * @param r {number}
  */
 function sendPoint(x, y, r) {
-    /** @type {HTMLFormElement} */
     const form = document.getElementById("data-form");
 
-    /** @type {HTMLInputElement} */
-    const customX = document.getElementById("custom-x");
-    customX.value = x.toString();
-    customX.disabled = false;
-    checkX(customX);
+    // Убедитесь, что радиус выбран
 
-    form["y"].value = y;
-    form["r"].value = r;
+    // Установим значение X в поле ввода
+    const xInput = document.getElementById("x");
+    xInput.value = x; // Округляем до 2 знаков после запятой
 
+    // Установим значение Y в поле ввода
+    const ySelect = document.getElementById("y");
+
+    // Приводим y к ближайшему большему значению из VALID_YS
+    const VALID_YS = [-5, -4, -3, -2, -1, 0, 1, 2, 3];
+        let nearestY = VALID_YS[0];
+        let minDifference = Math.abs(y - nearestY);
+
+        VALID_YS.forEach((validY) => {
+            const difference = Math.abs(y - validY);
+            if (difference < minDifference) {
+                nearestY = validY;
+                minDifference = difference;
+            }
+        });
+
+    ySelect.value = nearestY;
+
+    const rSelect = document.getElementById("r");
+    rSelect.value = r;
+
+    // Отправка формы
     form.submit();
 }
+
 
 /**
  * Draws graph on canvas
@@ -85,9 +111,19 @@ function sendPoint(x, y, r) {
 function drawShape(ctx, canvas, points, R) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.scale(1, -1);
+    // Размер Canvas для графика
+    const GRAPH_WIDTH = canvas.width;
+    const GRAPH_HEIGHT = canvas.height;
 
+    // Пропорция R относительно Canvas
+    const scaleX = GRAPH_WIDTH / (2 * R); // Длина между -R и R
+    const scaleY = GRAPH_HEIGHT / (2 * R); // Высота между -R и R
+
+    ctx.save(); // Сохраняем состояние контекста
+    ctx.translate(canvas.width / 2, canvas.height / 2); // Перемещаем начало координат в центр Canvas
+    ctx.scale(scaleX, -scaleY); // Масштабируем график
+
+    // Рисуем фигуру
     ctx.fillStyle = "rgb(51 153 255)";
     ctx.beginPath();
 
@@ -108,37 +144,25 @@ function drawShape(ctx, canvas, points, R) {
     ctx.closePath();
     ctx.fill();
 
-    // Axis
+    // Рисуем оси
     ctx.strokeStyle = "white";
     ctx.beginPath();
-    ctx.moveTo(-canvas.width / 2, 0);
-    ctx.lineTo(canvas.width / 2, 0);
-    ctx.moveTo(0, -canvas.height / 2);
-    ctx.lineTo(0, canvas.height / 2);
+    ctx.moveTo(-R, 0); // Линия от -R до R по X
+    ctx.lineTo(R, 0);
+    ctx.moveTo(0, -R); // Линия от -R до R по Y
+    ctx.lineTo(0, R);
     ctx.stroke();
 
-    ctx.fillStyle = "white";
-
+    // Рисуем точки
+    ctx.fillStyle = "black";
     points.forEach((point) => {
-        const { x, y } = point;
+            const { x, y } = point;
 
-        ctx.beginPath();
-        ctx.arc(x * SCALE_FACTOR, y * SCALE_FACTOR, 5, 0, Math.PI * 2);
-        ctx.fill();
-    });
+            ctx.beginPath();
+            ctx.arc(x * SCALE_FACTOR, y * SCALE_FACTOR, 5, 0, Math.PI * 2);
+            ctx.fill();
+        });
 
-    ctx.scale(1, -1);
-    ctx.fillStyle = "white";
-    ctx.font = "12px monospace";
-    ctx.fillText("R", R, -6);
-    ctx.fillText("R/2", R / 2, -6);
-    ctx.fillText("-R/2", -R / 2, -6);
-    ctx.fillText("-R", -R, -6);
 
-    ctx.fillText("R", 6, -R);
-    ctx.fillText("R/2", 6, -R / 2);
-    ctx.fillText("-R/2", 6, R / 2);
-    ctx.fillText("-R", 6, R);
-
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+    ctx.restore(); // Восстанавливаем исходное состояние контекста
 }
